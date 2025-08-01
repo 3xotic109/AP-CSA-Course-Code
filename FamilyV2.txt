@@ -1,0 +1,52 @@
+/**
+ * The purpose of this program is to read data from a file
+ * and determine the percent possibilities of children in
+ * a two-person family
+ *
+ * @author Joshua Chun
+ * @version 11/7/2024
+ *
+ */
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Family {
+    public static void main(String[] args) throws IOException {
+        int BB =0;
+        int BG =0;
+        int GG =0;
+        int total = 0;
+        double BBPerc;
+        double BGPerc;
+        double GGPerc;
+        String token = "";
+        File fileName = new File("C:\\AP CSA Course Files\\Code Module 4\\src\\familyMembers.txt");
+        Scanner inFile = new Scanner(fileName);
+
+        while (inFile.hasNext()) {
+            token = inFile.next();
+            if(token.equals("BB")) {
+                BB ++;
+            }
+            else if(token.equals("BG") || token.equals("GB")) {
+                BG ++;
+            }
+            else  {
+                GG ++;
+            }
+        }
+        total = BB + BG + GG;
+        BBPerc = (int)(((double)BB / total) * 100 + 0.5)/100.0;
+        BGPerc = (int)(((double)BG / total) * 100 + 0.5)/100.0;
+        GGPerc = (int)(((double)GG / total) * 100 + 0.5)/100.0;
+        System.out.println("Composition statistics for families with two children. \n");
+        System.out.println("Total Number of Families: " + total + "\n");
+        System.out.println("Number of Families With: ");
+        System.out.println("2 Boys: " + BB + " represents " + BBPerc + "%");
+        System.out.println("2 Girls: " + GG + " represents " + GGPerc + "%");
+        System.out.println("1 boy and 1 girl: " + BG + " represents " + BGPerc + "%");
+    }
+}
